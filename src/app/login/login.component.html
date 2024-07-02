@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="w3-row-padding w3-margin-top">
+<div class="w3-center w3-third"><p></p></div>
+<div class="w3-center w3-third">
+    <div class="w3-container w3-card-4">
+      <h2>Acceso identificado</h2>
+      <div class="w3-section">
+        <label>E-mail</label>     
+        <input class="w3-input" type="text"  [(ngModel)]="user" required>
+        <label *ngIf="valido" class="w3-text-red w3-small">{{ mensaje }}</label>
+      </div>
+      <div class="w3-section">     
+        <label>Contraseña</label> 
+        <input class="w3-input" type="password" required="" [(ngModel)]="pass">
+        
+      </div>
+      <div class="w3-section">      
+        <a class="w3-bar-item w3-button w3-padding-16 w3-theme" (click)="iniciarSesion()">Conectar</a>
+      </div>
+      <div class="w3-section">      
+        <a href="#" class="w3-bar-item w3-padding-16">¿Has olvidado tu contraseña?</a>
+      </div>
+    </div>
+    </div>
+</div>

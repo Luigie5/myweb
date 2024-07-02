@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import { collectionData, Firestore } from '@angular/fire/firestore';
-import { addDoc, collection, doc, setDoc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
-import { Timestamp} from "firebase/firestore";
+import { collection, doc, setDoc, updateDoc, deleteDoc, getDoc } from 'firebase/firestore';
 
 @Injectable({
     providedIn: 'root'
@@ -9,60 +8,34 @@ import { Timestamp} from "firebase/firestore";
 
 export class DataService{
     constructor(private firestore:Firestore){}
-    getInventario(){
-        const inventarioRef= collection(this.firestore, 'inventario');
-        return collectionData(inventarioRef);
+    getUsuarios(){
+        const usuariosRef= collection(this.firestore, 'usuarios');
+        return collectionData(usuariosRef);
     }
-    hacerPedido(nombre:String,cantidadPedida:number, cantidadActual:number, pedidor:String, comentario:String){
-        const inventarioDocRef= doc(this.firestore, 'inventario/'+nombre);
-        const pedidosDocRef= collection(this.firestore, 'pedidos');
-        var pedido= {
+    crearDatosUsuario(nombre:string,apellidos:string,dni:string,direccion:string,cp:string, telefono:string, email:string, uid:string ){
+        const usuariosRef= collection(this.firestore, 'usuarios');
+        var usuario:any= {
             nombre: nombre,
-            cantidad: cantidadPedida,
-            pedidor: pedidor,
-            fecha: Timestamp.now(),
-            comentario: comentario
+            apellidos: apellidos,
+            dni: dni,
+            direccion: direccion,
+            cp: cp,
+            telefono: telefono,
+            email: email,
+
         };
-        addDoc(pedidosDocRef, pedido);
-        return updateDoc(inventarioDocRef,{cantidad: cantidadActual-cantidadPedida});
+        setDoc(doc(usuariosRef, uid), usuario)
     }
-    getObjeto(nombre: string){
-        const inventarioDocRef= doc(this.firestore, 'inventario/'+nombre);
+    getDatosUsuario(uid: string){
+        const inventarioDocRef= doc(this.firestore, 'usuarios/'+uid);
         return getDoc(inventarioDocRef);
     }
-    updateObjeto(obj:any){
-        const inventarioDocRef= doc(this.firestore, 'inventario/'+obj.nombre);
-        return updateDoc(inventarioDocRef,obj);
+    updateDatosUsuario(user:any){
+        const UsuarioDocRef= doc(this.firestore, 'usuarios/'+user.uid);
+        return updateDoc(UsuarioDocRef,user);
     }
-    añadirObjetos(nuevo:any){
-        const inventarioDocRef = collection(this.firestore, 'inventario');
-        return setDoc(doc(inventarioDocRef, nuevo.nombre), nuevo)
-    }
-    getPedidos(){
-        const pedidosRef= collection(this.firestore, 'pedidos');
-        return collectionData(pedidosRef);
-    }
-    getEntradas(){
-        const pedidosRef= collection(this.firestore, 'entradas');
-        return collectionData(pedidosRef);
-    }
-    añadirObjeto(nombre:String,cantidadPedida:number, cantidadActual:number){
-        const inventarioDocRef= doc(this.firestore, 'inventario/'+nombre);
-        return updateDoc(inventarioDocRef,{cantidad: cantidadActual+cantidadPedida});
-    }
-    crearEntrada(nombre:String,cantidadPedida:number, proveedor: string, precio: number){
-        const pedidosDocRef= collection(this.firestore, 'entradas');
-        var entrada= {
-            nombre: nombre,
-            cantidad: cantidadPedida,
-            precio: precio*cantidadPedida,
-            proveedor: proveedor,
-            fecha: Timestamp.now(),
-        };
-        return addDoc(pedidosDocRef, entrada);
-    }
-    eliminarProducto(nombre: string){
-        const inventarioDocRef= doc(this.firestore, 'inventario/'+nombre);
-        return deleteDoc(inventarioDocRef);
+    eliminarDatosUsuario(uid: string){
+        const usuarioDocRef= doc(this.firestore, 'usuarios/'+uid);
+        return deleteDoc(usuarioDocRef);
     }
 }

@@ -6,8 +6,12 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(),provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), /* The problem line */
-  provideFirestore(() => getFirestore()),]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(),
+  provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+  provideFirestore(() => getFirestore()),
+  provideAuth(() => getAuth()),
+]
 };
