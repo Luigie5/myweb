@@ -27,8 +27,8 @@ export class DataService{
         setDoc(doc(usuariosRef, uid), usuario)
     }
     getDatosUsuario(uid: string){
-        const inventarioDocRef= doc(this.firestore, 'usuarios/'+uid);
-        return getDoc(inventarioDocRef);
+        const UsuarioDocRef= doc(this.firestore, 'usuarios/'+uid);
+        return getDoc(UsuarioDocRef);
     }
     updateDatosUsuario(user:any){
         const UsuarioDocRef= doc(this.firestore, 'usuarios/'+user.uid);
@@ -37,5 +37,14 @@ export class DataService{
     eliminarDatosUsuario(uid: string){
         const usuarioDocRef= doc(this.firestore, 'usuarios/'+uid);
         return deleteDoc(usuarioDocRef);
+    }
+    getLibros(){
+        const bibliotecaRef= collection(this.firestore, 'biblioteca');
+        return collectionData(bibliotecaRef);
+    }
+    async getLibro(libroID: string){
+        const libroDocRef= doc(this.firestore, 'biblioteca/'+libroID);
+        const docSnap = await getDoc(libroDocRef);
+        return docSnap.data();
     }
 }

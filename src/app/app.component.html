@@ -6,6 +6,8 @@
     <a [routerLink]="['signup']" class="w3-bar-item w3-button w3-padding-16">Alta en línea</a>
     <a [routerLink]="['login']" class="w3-bar-item w3-button w3-padding-16">Iniciar sesión</a>
     <a  class="w3-bar-item w3-button w3-padding-16" (click)="cerrarSesion()">deslog</a>
+    <input class="w3-input" type="text"  [(ngModel)]="busqueda">
+    <button (click)="buscar()">Bus</button>
   </div>
 </header>
 

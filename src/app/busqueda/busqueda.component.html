@@ -1,0 +1,21 @@
+
+<ol class="w3-col s9">
+    <h2>{{listaEncontrada.length}} Resultados</h2>
+    <div *ngFor="let entrada of listaMostrada; let i=index" >
+        <div class="w3-container w3-row-padding w3-row w3-border w3-button w3-col s12 w3-left" style="text-align: left;" (click)="verLibro(entrada.isbn)">
+            <img class="w3-col s1"src="">
+            <div class="w3-col s10 w3-container">
+                <h2>{{entrada.titulo}}</h2>
+                <h4>{{entrada.autor}}</h4>
+                <h5>Lugar / ed. / año: {{entrada.autor}}, {{entrada.autor}}, {{entrada.isbn}}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="w3-center w3-padding-32 w3-col s12">
+        <div class="w3-bar">
+          <button class="w3-bar-item w3-button w3-hover-theme" (click)="paginarTexto('first')">«</button>
+          <button [ngClass]="{'w3-theme' : i==paginaActual}" *ngFor="let entrada of paginacion; let i=index" (click)="paginar(i)" class="w3-bar-item w3-button w3-hover-theme">{{i+1}}</button>
+          <button class="w3-bar-item w3-button w3-hover-theme" (click)="paginarTexto('last')">»</button>
+        </div>
+      </div>
+</ol>

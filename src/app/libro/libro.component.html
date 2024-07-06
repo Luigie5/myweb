@@ -1,0 +1,44 @@
+
+<div class="w3-container ">
+    <div class="w3-quarter "><p></p></div>
+    <div class="w3-half ">
+        <div class="w3-container w3-row-padding w3-row w3-border w3-col w3-left">
+            <img class="w3-col s1" alt="image" src="">
+            <div class="w3-col s10 w3-container">
+                <h2><b>{{libro.titulo}}</b></h2>
+                <h4>{{libro.autor}}</h4>
+            </div>
+        </div>
+        <div>
+
+        </div>
+        <div class="w3-border w3-margin-top w3-responsive w3-card-4">
+            <div class="w3-bar w3-theme">
+                <button class="w3-bar-item w3-button testbtn w3-padding-16" (click)="tab=0">Ejemplares</button>
+                <button class="w3-bar-item w3-button testbtn w3-padding-16" (click)="tab=1">Información general</button>
+            </div>
+            <div *ngIf="tab==0"class=" ">
+                <div class="">
+                    <table class="w3-col l12 w3-table w3-striped w3-bordered">
+                        <thead>
+                            <tr class="w3-theme-d2">
+                                <th>Signatura</th><th>Tipo de ejemplar</th><th>Disponibilidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="w3-white">
+                                <td>Signatura</td><td>Tipo de ejemplar</td><td>Disponibilidad</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div *ngIf="tab==1"class="w3-container w3-row-padding w3-row w3-border w3-col w3-left">
+                <h5>Titulo: {{libro.titulo}}</h5>
+
+                <h5>Autor: {{libro.autor}}</h5>
+                <h5>ISBN: {{libro.isbn}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
